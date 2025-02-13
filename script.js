@@ -28,6 +28,7 @@ function startTerminalEffect() {
 // Function to show the command line prompt
 function showCommandLine() {
     commandLine.classList.remove('hidden');
+    document.getElementById("username").focus(); // Focus the input field
 }
 
 // Boot-in functionality (after entering username)

@@ -2,12 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Courier New', monospace; /* Hacker-style font */
 }
 
 body {
     background: #111;
-    color: #fff;
+    color: #00ff00; /* Neon green text */
     overflow-x: hidden;
 }
 
@@ -40,14 +40,9 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #00ff00;
     text-decoration: none;
     font-size: 1.1rem;
-}
-
-section {
-    padding: 60px 20px;
-    text-align: center;
 }
 
 #hero {
@@ -57,52 +52,55 @@ section {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #fff;
+    text-align: center;
 }
 
-#hero h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-}
-
-#hero p {
-    font-size: 1.5rem;
-    margin-bottom: 40px;
-}
-
-h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-.projects-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.project {
-    background: #444;
-    padding: 30px;
-    width: 250px;
-    border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 4px 15px rgba(0, 123, 255, 0.5);
-}
-
-input, textarea {
+.code-container {
+    position: absolute;
+    top: 0;
     width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+.code-line {
+    opacity: 0;
+    animation: typeEffect 2s ease-out infinite;
+}
+
+@keyframes typeEffect {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+#login-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+}
+
+input {
     padding: 10px;
     margin: 10px 0;
+    width: 250px;
     border-radius: 5px;
     border: 1px solid #555;
     background: #333;
-    color: #fff;
+    color: #00ff00;
 }
 
 button {
@@ -126,44 +124,13 @@ footer {
     color: #fff;
 }
 
-.animated {
-    opacity: 0;
-    animation-duration: 1s;
-    animation-fill-mode: both;
-}
-
-.fadeIn {
-    animation-name: fadeIn;
-}
-
-.fadeInUp {
-    animation-name: fadeInUp;
-}
-
-.slideInUp {
-    animation-name: slideInUp;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInUp {
-    from {
+@keyframes hackerCode {
+    0% {
         opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
         transform: translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(100%);
     }
 }

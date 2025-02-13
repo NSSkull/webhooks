@@ -13,7 +13,6 @@
         <div class="logo">NS Skull</div>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html">Projects</a></li>
             </ul>
         </nav>
@@ -21,18 +20,25 @@
 </header>
 
 <section id="hero">
-    <h1>Welcome to My Portfolio</h1>
-    <p>Explore my work, and see the amazing projects I've created!</p>
-</section>
+    <div class="code-container">
+        <!-- Random code animations -->
+        <div class="code-line">Initializing system...</div>
+        <div class="code-line">Loading programs...</div>
+        <div class="code-line">Booting up...</div>
+        <div class="code-line">Verifying credentials...</div>
+    </div>
 
-<section>
-    <h2>About Me</h2>
-    <p>Hi! I'm NS Skull, a passionate developer. I love coding and creating amazing web and software solutions!</p>
+    <div id="login-container">
+        <h1>Enter Username to Boot In</h1>
+        <input type="text" id="username" placeholder="Enter username..." />
+        <button id="boot-btn">Boot In</button>
+    </div>
 </section>
 
 <footer>
     <p>&copy; 2025 NS Skull. All rights reserved.</p>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>

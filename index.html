@@ -3,126 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webhooks</title>
+    <title>Webhook Sender</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
             margin: 0;
             padding: 0;
-            animation: fadeIn 1s ease-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: fadeIn 1.5s ease-in-out;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
         .container {
-            width: 80%;
-            max-width: 900px;
-            margin: 50px auto;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.8);
             padding: 30px;
-            animation: slideIn 0.5s ease-in-out;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 600px;
+            animation: slideUp 0.7s ease-out;
         }
-        @keyframes slideIn {
+
+        @keyframes slideUp {
             from { transform: translateY(20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+
         h2 {
-            color: #2f8c7e;
-            animation: fadeIn 1s ease-out;
-        }
-        h3 {
-            color: #555;
-            font-size: 18px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .row {
-            display: flex;
-            justify-content: space-between;
+            text-align: center;
+            color: #ffcc00;
+            font-weight: 600;
             margin-bottom: 10px;
         }
-        .column {
-            flex: 1;
-            margin-right: 10px;
+
+        .error-header {
+            background: rgba(255, 69, 58, 0.8);
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            animation: pulseGlow 2s infinite alternate;
         }
-        .column:last-child {
-            margin-right: 0;
+
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 5px rgba(255, 69, 58, 0.5); }
+            to { box-shadow: 0 0 15px rgba(255, 69, 58, 1); }
         }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
         input[type="text"], textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
+            padding: 10px;
+            border: none;
             border-radius: 5px;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            transition: 0.3s;
         }
-        input[type="text"]:focus, textarea:focus {
-            border-color: #04AA6D;
+
+        input:focus, textarea:focus {
             outline: none;
+            box-shadow: 0 0 8px #ffcc00;
         }
+
         textarea {
-            resize: vertical;
-            height: 120px;
+            height: 100px;
+            resize: none;
         }
-        input[type="submit"] {
-            background-color: #04AA6D;
-            color: white;
-            padding: 12px 25px;
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: #ffcc00;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
-        input[type="submit"]:hover {
-            background-color: #039657;
+
+        .btn-submit:hover {
+            background: #ffdb4d;
             transform: scale(1.05);
         }
-        .footer-links {
-            text-align: center;
-            margin-top: 30px;
-            color: #888;
-        }
-        .footer-links a {
-            color: #2f8c7e;
-            text-decoration: none;
-        }
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
+
         .embed-preview {
-            background-color: #2f3136;
-            border-radius: 10px;
-            color: white;
-            padding: 15px;
             margin-top: 20px;
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            transition: 0.5s ease-in-out;
         }
-        .embed-preview h4 {
-            margin: 0;
-            font-size: 18px;
-        }
-        .embed-preview p {
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
             font-size: 14px;
-        }
-        .embed-footer {
-            font-size: 12px;
-            margin-top: 10px;
-            color: #bbb;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <center>
-            <h2>Welcome to Webhooks by <a href="https://discord.gg/YFr7yxt9QN" target="_blank">NS_Skull @ Skull Studios</a></h2>
-        </center>
+        <div class="error-header">
+            ❗ Some errors might appear in the console, but don't worry—everything still works fine!
+        </div>
+
+        <h2>Webhook Sender</h2>
 
         <form id="webhookForm">
             <div class="form-group">
@@ -143,26 +149,26 @@
             </div>
             <div class="form-group">
                 <label for="embedColor">Embed Color (Hex):</label>
-                <input type="text" id="embedColor" value="#2f8c7e" placeholder="Enter hex color">
+                <input type="text" id="embedColor" value="#ffcc00">
             </div>
             <div class="form-group">
                 <label for="footerText">Footer Text:</label>
                 <input type="text" id="footerText" placeholder="Custom footer text (optional)">
             </div>
             <div class="form-group">
-                <input type="submit" value="SEND">
+                <button type="submit" class="btn-submit">SEND</button>
             </div>
         </form>
 
-        <div id="embedPreview" class="embed-preview" style="display: none;">
+        <div id="embedPreview" class="embed-preview">
             <h4>Embed Preview:</h4>
             <p><strong>Title:</strong> <span id="previewTitle"></span></p>
             <p><strong>Description:</strong> <span id="previewDescription"></span></p>
-            <p class="embed-footer">Footer Text: <span id="previewFooter">Custom Footer</span></p>
+            <p><strong>Footer:</strong> <span id="previewFooter"></span></p>
         </div>
 
-        <div class="footer-links">
-            <p>Download this website by <a href="https://github.com/lRusian/discord-simple" target="_blank">CLICK HERE</a></p>
+        <div class="footer">
+            Created by <a href="https://discord.gg/YFr7yxt9QN" target="_blank" style="color: #ffcc00;">NS_Skull @ Skull Studios</a>
         </div>
     </div>
 
@@ -179,40 +185,28 @@
 
             const data = {
                 content: message,
-                embeds: [
-                    {
-                        title: embedTitle || 'No Title',
-                        description: embedDescription || 'No Description',
-                        color: parseInt(embedColor.replace('#', ''), 16),
-                        footer: {
-                            text: footerText || 'Custom Footer'
-                        }
-                    }
-                ]
+                embeds: [{
+                    title: embedTitle || 'No Title',
+                    description: embedDescription || 'No Description',
+                    color: parseInt(embedColor.replace('#', ''), 16),
+                    footer: { text: footerText || 'Custom Footer' }
+                }]
             };
 
             fetch(webhook, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             })
-            .then(response => response.json())
-            .then(data => {
-                alert('Message sent successfully!');
-            })
-            .catch(error => {
-                alert('Error sending message');
-                console.error('Error:', error);
-            });
+            .then(response => alert('Message sent successfully!'))
+            .catch(error => alert('Error sending message'));
 
-            // Update preview
             document.getElementById('previewTitle').textContent = embedTitle || 'No Title';
             document.getElementById('previewDescription').textContent = embedDescription || 'No Description';
             document.getElementById('previewFooter').textContent = footerText || 'Custom Footer';
             document.getElementById('embedPreview').style.display = 'block';
         });
     </script>
+
 </body>
 </html>

@@ -3,230 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webhook Sender</title>
+    <title>Webhooks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #2C2F33;
-            color: #fff;
+            font-family: Arial, sans-serif;
+            background-color: #36393F;
+            color: white;
             margin: 0;
             padding: 0;
-            display: flex;
-            height: 100vh;
         }
-
-        .container {
-            width: 50%;
-            background: #23272A;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 0.7s ease-in-out;
-        }
-
-        .sidebar {
-            width: 35%;
-            background: #36393F;
-            border-left: 2px solid rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-            animation: slideIn 0.7s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(30px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        h2 {
+        header {
+            background: #7289DA;
+            padding: 15px;
             text-align: center;
-            color: #ffcc00;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: bold;
         }
-
-        .form-group {
-            margin-bottom: 15px;
+        .container {
+            display: flex;
+            padding: 20px;
         }
-
-        input[type="text"], textarea {
+        .sidebar {
+            width: 30%;
+            padding: 20px;
+            background: #2F3136;
+            border-radius: 10px;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background: #40444B;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+        input, textarea {
             width: 100%;
             padding: 10px;
+            margin-top: 10px;
+            background: #2F3136;
+            color: white;
             border: none;
             border-radius: 5px;
-            font-size: 14px;
         }
-
-        textarea {
-            height: 80px;
-            resize: none;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 12px;
-            background: #ffcc00;
-            color: #333;
-            font-weight: bold;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
+        input[type=submit] {
+            background-color: #7289DA;
             cursor: pointer;
         }
-
-        .btn-submit:hover {
-            background: #ffdb4d;
-        }
-
-        /* Discord-Style Embed Preview */
-        .embed-preview {
-            background: #2C2F33;
+        .preview {
+            background: #23272A;
             padding: 15px;
-            border-radius: 8px;
-            color: white;
-            text-align: left;
-            border-left: 5px solid #ffcc00;
-            margin-top: 10px;
+            border-radius: 10px;
+            margin-top: 20px;
         }
-
-        .embed-title {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .embed-description {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        .embed-footer {
-            font-size: 12px;
-            opacity: 0.6;
-            margin-top: 10px;
-        }
-
-        /* Webhook User Styling */
-        .webhook-user {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .webhook-user img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .webhook-username {
-            font-size: 16px;
-            font-weight: bold;
-        }
-
         .footer {
             text-align: center;
-            margin-top: 20px;
-            opacity: 0.7;
-            font-size: 12px;
+            padding: 10px;
+            background: #7289DA;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-
+    <header>Errors do not affect functionality - The website still works fine</header>
     <div class="container">
-        <h2>Webhook Sender</h2>
-
-        <form id="webhookForm">
-            <div class="form-group">
+        <div class="sidebar">
+            <h3>Message Preview</h3>
+            <div id="preview" class="preview">Your message will appear here...</div>
+        </div>
+        <div class="content">
+            <form id="webhookForm">
+                <h2>Welcome to Webhooks by <a href="https://discord.gg/YFr7yxt9QN" style="color: #7289DA;">NS_Skull @ Skull Studios</a></h2>
                 <label for="webhook">Webhook URL:</label>
-                <input type="text" id="webhook" value="https://discord.com/api/webhooks/YOUR_WEBHOOK_URL">
-            </div>
-            <div class="form-group">
+                <input type="text" id="webhook" placeholder="Enter your Discord webhook URL">
                 <label for="message">Message:</label>
                 <textarea id="message" placeholder="Write something.."></textarea>
-            </div>
-            <div class="form-group">
-                <label for="embedTitle">Embed Title:</label>
-                <input type="text" id="embedTitle" placeholder="Embed title (optional)">
-            </div>
-            <div class="form-group">
-                <label for="embedDescription">Embed Description:</label>
-                <textarea id="embedDescription" placeholder="Embed description (optional)"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="embedColor">Embed Color (Hex):</label>
-                <input type="text" id="embedColor" value="#ffcc00">
-            </div>
-            <div class="form-group">
-                <label for="footerText">Footer Text:</label>
-                <input type="text" id="footerText" placeholder="Custom footer text (optional)">
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn-submit">SEND</button>
-            </div>
-        </form>
-
-        <div class="footer">Created by NS_Skull | Powered by Discord Webhooks</div>
-    </div>
-
-    <div class="sidebar">
-        <h3>Live Preview</h3>
-        <div class="webhook-user">
-            <img id="webhookAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png">
-            <span id="webhookName" class="webhook-username">Webhook</span>
-        </div>
-        <div id="embedPreview" class="embed-preview">
-            <div class="embed-title">No Title</div>
-            <div class="embed-description">No Description</div>
-            <div class="embed-footer">No Footer</div>
+                <input type="submit" value="SEND">
+            </form>
         </div>
     </div>
-
+    <div class="footer">Developed by NS_Skull @ Skull Studios</div>
     <script>
-        function updatePreview() {
-            const title = document.getElementById('embedTitle').value || 'No Title';
-            const description = document.getElementById('embedDescription').value || 'No Description';
-            const footer = document.getElementById('footerText').value || 'No Footer';
-
-            document.querySelector('.embed-title').textContent = title;
-            document.querySelector('.embed-description').textContent = description;
-            document.querySelector('.embed-footer').textContent = footer;
-        }
-
-        document.querySelectorAll('#embedTitle, #embedDescription, #footerText').forEach(input => {
-            input.addEventListener('input', updatePreview);
-        });
-
-        async function loadWebhookDetails() {
-            const webhookUrl = document.getElementById('webhook').value;
-            try {
-                const response = await fetch(webhookUrl);
-                if (!response.ok) throw new Error('Invalid Webhook');
-                const data = await response.json();
-                document.getElementById('webhookAvatar').src = data.avatar ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png` : "https://cdn.discordapp.com/embed/avatars/0.png";
-                document.getElementById('webhookName').textContent = data.name;
-            } catch (error) {
-                console.error("Failed to load webhook details:", error);
-            }
-        }
-
-        document.getElementById('webhook').addEventListener('input', loadWebhookDetails);
-        loadWebhookDetails(); // Load on page load
-
-        document.getElementById('webhookForm').addEventListener('submit', async function(event) {
+        document.getElementById('webhookForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            alert('Webhook sent!'); // Placeholder action
+            
+            const webhook = document.getElementById('webhook').value;
+            const message = document.getElementById('message').value;
+            
+            if (!webhook || !message) {
+                alert('Please enter both a webhook URL and a message.');
+                return;
+            }
+            
+            const data = { content: message };
+            
+            fetch(webhook, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(() => {
+                alert('Message sent successfully!');
+                document.getElementById('preview').textContent = message;
+            })
+            .catch(error => {
+                alert('Error sending message');
+                console.error('Error:', error);
+            });
+        });
+        document.getElementById('message').addEventListener('input', function() {
+            document.getElementById('preview').textContent = this.value;
         });
     </script>
-
 </body>
 </html>

@@ -14,15 +14,7 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .container {
@@ -30,37 +22,36 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            width: 90%;
-            max-width: 600px;
-            animation: slideUp 0.7s ease-out;
+            width: 50%;
+            animation: fadeIn 0.7s ease-in-out;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .sidebar {
+            width: 30%;
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            animation: slideIn 0.7s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
         h2 {
             text-align: center;
             color: #ffcc00;
             font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .error-header {
-            background: rgba(255, 69, 58, 0.8);
-            padding: 10px;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 400;
-            margin-bottom: 15px;
-            animation: pulseGlow 2s infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            from { box-shadow: 0 0 5px rgba(255, 69, 58, 0.5); }
-            to { box-shadow: 0 0 15px rgba(255, 69, 58, 1); }
         }
 
         .form-group {
@@ -73,16 +64,10 @@
             border: none;
             border-radius: 5px;
             font-size: 14px;
-            transition: 0.3s;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            box-shadow: 0 0 8px #ffcc00;
         }
 
         textarea {
-            height: 100px;
+            height: 80px;
             resize: none;
         }
 
@@ -96,38 +81,42 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: 0.3s;
         }
 
         .btn-submit:hover {
             background: #ffdb4d;
-            transform: scale(1.05);
         }
 
+        /* Sidebar Embed Preview */
         .embed-preview {
-            margin-top: 20px;
             background: #222;
             padding: 15px;
             border-radius: 8px;
-            display: none;
-            transition: 0.5s ease-in-out;
+            color: white;
+            text-align: left;
         }
 
-        .footer {
-            text-align: center;
-            margin-top: 20px;
+        .embed-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .embed-description {
             font-size: 14px;
-            opacity: 0.7;
+            opacity: 0.8;
+        }
+
+        .embed-footer {
+            font-size: 12px;
+            opacity: 0.6;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="error-header">
-            ❗ Some errors might appear in the console, but don't worry—everything still works fine!
-        </div>
-
         <h2>Webhook Sender</h2>
 
         <form id="webhookForm">
@@ -159,20 +148,32 @@
                 <button type="submit" class="btn-submit">SEND</button>
             </div>
         </form>
+    </div>
 
+    <div class="sidebar">
+        <h3>Live Preview</h3>
         <div id="embedPreview" class="embed-preview">
-            <h4>Embed Preview:</h4>
-            <p><strong>Title:</strong> <span id="previewTitle"></span></p>
-            <p><strong>Description:</strong> <span id="previewDescription"></span></p>
-            <p><strong>Footer:</strong> <span id="previewFooter"></span></p>
-        </div>
-
-        <div class="footer">
-            Created by <a href="https://discord.gg/YFr7yxt9QN" target="_blank" style="color: #ffcc00;">NS_Skull @ Skull Studios</a>
+            <div class="embed-title">No Title</div>
+            <div class="embed-description">No Description</div>
+            <div class="embed-footer">No Footer</div>
         </div>
     </div>
 
     <script>
+        function updatePreview() {
+            const title = document.getElementById('embedTitle').value || 'No Title';
+            const description = document.getElementById('embedDescription').value || 'No Description';
+            const footer = document.getElementById('footerText').value || 'No Footer';
+
+            document.querySelector('.embed-title').textContent = title;
+            document.querySelector('.embed-description').textContent = description;
+            document.querySelector('.embed-footer').textContent = footer;
+        }
+
+        document.querySelectorAll('#embedTitle, #embedDescription, #footerText').forEach(input => {
+            input.addEventListener('input', updatePreview);
+        });
+
         document.getElementById('webhookForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -200,11 +201,6 @@
             })
             .then(response => alert('Message sent successfully!'))
             .catch(error => alert('Error sending message'));
-
-            document.getElementById('previewTitle').textContent = embedTitle || 'No Title';
-            document.getElementById('previewDescription').textContent = embedDescription || 'No Description';
-            document.getElementById('previewFooter').textContent = footerText || 'Custom Footer';
-            document.getElementById('embedPreview').style.display = 'block';
         });
     </script>
 

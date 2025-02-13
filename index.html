@@ -11,6 +11,11 @@
             color: #333;
             margin: 0;
             padding: 0;
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         .container {
             width: 80%;
@@ -20,9 +25,15 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             padding: 30px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         h2 {
             color: #2f8c7e;
+            animation: fadeIn 1s ease-out;
         }
         h3 {
             color: #555;
@@ -49,6 +60,11 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        input[type="text"]:focus, textarea:focus {
+            border-color: #04AA6D;
+            outline: none;
         }
         textarea {
             resize: vertical;
@@ -63,9 +79,11 @@
             cursor: pointer;
             font-size: 16px;
             margin-top: 10px;
+            transition: all 0.3s ease;
         }
         input[type="submit"]:hover {
             background-color: #039657;
+            transform: scale(1.05);
         }
         .footer-links {
             text-align: center;
@@ -128,6 +146,10 @@
                 <input type="text" id="embedColor" value="#2f8c7e" placeholder="Enter hex color">
             </div>
             <div class="form-group">
+                <label for="footerText">Footer Text:</label>
+                <input type="text" id="footerText" placeholder="Custom footer text (optional)">
+            </div>
+            <div class="form-group">
                 <input type="submit" value="SEND">
             </div>
         </form>
@@ -136,7 +158,7 @@
             <h4>Embed Preview:</h4>
             <p><strong>Title:</strong> <span id="previewTitle"></span></p>
             <p><strong>Description:</strong> <span id="previewDescription"></span></p>
-            <p class="embed-footer">Footer Text: Custom Footer</p>
+            <p class="embed-footer">Footer Text: <span id="previewFooter">Custom Footer</span></p>
         </div>
 
         <div class="footer-links">
@@ -153,6 +175,7 @@
             const embedTitle = document.getElementById('embedTitle').value;
             const embedDescription = document.getElementById('embedDescription').value;
             const embedColor = document.getElementById('embedColor').value;
+            const footerText = document.getElementById('footerText').value;
 
             const data = {
                 content: message,
@@ -162,7 +185,7 @@
                         description: embedDescription || 'No Description',
                         color: parseInt(embedColor.replace('#', ''), 16),
                         footer: {
-                            text: 'Custom Footer'
+                            text: footerText || 'Custom Footer'
                         }
                     }
                 ]
@@ -187,6 +210,7 @@
             // Update preview
             document.getElementById('previewTitle').textContent = embedTitle || 'No Title';
             document.getElementById('previewDescription').textContent = embedDescription || 'No Description';
+            document.getElementById('previewFooter').textContent = footerText || 'Custom Footer';
             document.getElementById('embedPreview').style.display = 'block';
         });
     </script>

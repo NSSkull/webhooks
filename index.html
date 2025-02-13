@@ -1,12 +1,67 @@
-echo "<!DOCTYPE html>
-<html lang='en'>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>NS Skull's Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NS Skull - Developer Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to My GitHub Page!</h1>
-    <p>This site is hosted using GitHub Pages.</p>
+    <header>
+        <div class="navbar">
+            <div class="logo">NS Skull</div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <h1 class="animated fadeIn">Welcome to My Developer Portfolio</h1>
+        <p class="animated fadeIn">Building the future with code and creativity.</p>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="animated slideInUp">About Me</h2>
+        <p class="animated slideInUp">I’m NS Skull, a passionate developer who loves coding and creating amazing projects. I specialize in web development, game development, and more.</p>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="animated slideInUp">My Projects</h2>
+        <div class="projects-container">
+            <div class="project animated fadeInUp">
+                <h3>Project 1</h3>
+                <p>Project 1 description goes here.</p>
+            </div>
+            <div class="project animated fadeInUp">
+                <h3>Project 2</h3>
+                <p>Project 2 description goes here.</p>
+            </div>
+            <div class="project animated fadeInUp">
+                <h3>Project 3</h3>
+                <p>Project 3 description goes here.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="animated slideInUp">Contact Me</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 NS Skull. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
 </body>
-</html>" > index.html
+</html>

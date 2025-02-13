@@ -1,16 +1,19 @@
+/* Universal resets */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Courier New', monospace; /* Hacker-style font */
+    font-family: 'Courier New', monospace;
 }
 
 body {
-    background: #111;
-    color: #00ff00; /* Neon green text */
+    background: #000; /* Black background for CMD look */
+    color: #00ff00; /* Neon green text color */
     overflow: hidden;
+    font-size: 1.1rem;
 }
 
+/* Header section */
 header {
     background: #333;
     padding: 20px;
@@ -42,39 +45,41 @@ nav ul li {
 nav ul li a {
     color: #00ff00;
     text-decoration: none;
-    font-size: 1.1rem;
 }
 
+/* Hero section */
 #hero {
-    background: #222;
+    background: #000;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     position: relative;
 }
 
+/* Terminal styling */
 .terminal {
     width: 80%;
+    max-width: 900px;
     height: 60vh;
     background: #000;
     color: #00ff00;
-    padding: 10px;
+    padding: 20px;
     border-radius: 10px;
     overflow-y: auto;
+    white-space: pre-wrap; /* Allow multi-line code */
     font-size: 1.2rem;
-    white-space: nowrap;
     letter-spacing: 1px;
     border: 1px solid #555;
+    margin-bottom: 20px;
 }
 
 #command-line {
-    position: absolute;
-    bottom: 20px;
     color: #00ff00;
     font-size: 1.2rem;
+    display: flex;
+    align-items: center;
 }
 
 input {
@@ -85,15 +90,17 @@ input {
     border: 1px solid #555;
     background: #333;
     color: #00ff00;
+    font-size: 1.2rem;
 }
 
 button {
     background: #007BFF;
     color: #fff;
     border: none;
-    padding: 15px;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1.1rem;
     transition: background 0.3s ease;
 }
 
@@ -101,6 +108,7 @@ button:hover {
     background: #0056b3;
 }
 
+/* Footer */
 footer {
     text-align: center;
     background: #333;
@@ -108,6 +116,11 @@ footer {
     color: #fff;
 }
 
+/* Hide the command line initially */
 .hidden {
     display: none;
+}
+
+.prompt {
+    margin-right: 10px;
 }

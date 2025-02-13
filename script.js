@@ -1,31 +1,48 @@
-// Get the elements
-const codeLines = document.querySelectorAll('.code-line');
-const loginContainer = document.getElementById('login-container');
+// Get elements
+const codeContainer = document.querySelector('.code-container');
+const commandLine = document.getElementById('command-line');
 const bootBtn = document.getElementById('boot-btn');
 const usernameInput = document.getElementById('username');
 
-// Simulate the code running down the screen with a delay
-let delay = 0;
-codeLines.forEach((line, index) => {
-    setTimeout(() => {
-        line.style.animationDelay = `${delay}s`;
-        line.style.opacity = 1;
-    }, delay * 1000);
-    delay += 2; // Delay for each line
-});
+// Function to generate random 1's and 0's for terminal effect
+function generateCode() {
+    const chars = ['0', '1'];
+    return chars[Math.floor(Math.random() * chars.length)];
+}
 
-// After the "code" finishes, show the username input form
-setTimeout(() => {
-    loginContainer.style.display = 'flex';
-}, delay * 1000);
+// Function to simulate the terminal effect
+function startTerminalEffect() {
+    let lineCount = 100; // Number of lines of code
+    let codeInterval = setInterval(() => {
+        let codeLine = document.createElement('div');
+        codeLine.innerText = generateCode();
+        codeLine.style.animation = `randomCode 3s linear infinite`;
+        codeContainer.appendChild(codeLine);
+        
+        if (--lineCount <= 0) {
+            clearInterval(codeInterval); // Stop generating lines
+            showCommandLine(); // Show the command line after terminal finishes
+        }
+    }, 50); // Every 50ms add a new line
+}
+
+// Function to show the command line prompt after animation
+function showCommandLine() {
+    commandLine.classList.remove('hidden');
+}
 
 // Boot-in functionality
 bootBtn.addEventListener('click', () => {
     const username = usernameInput.value;
     if (username) {
         alert(`Welcome, ${username}! Booting up the system...`);
-        // You can redirect or show other content after "booting"
+        // Optionally, you can redirect to another page after "booting"
     } else {
         alert('Please enter a valid username.');
     }
 });
+
+// Start the terminal effect when the page loads
+window.onload = () => {
+    startTerminalEffect();
+};

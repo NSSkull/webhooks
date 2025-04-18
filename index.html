@@ -1,15 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2D Shooter Game</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profiles - Skull Studios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #001f3f, #003366, #004c99);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #cceaff;
+      margin-bottom: 2rem;
+    }
+
+    .cta-btn {
+      background: #0074D9;
+      border: none;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .cta-btn:hover {
+      background: #005fa3;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .section-sub {
+      color: #cceaff;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 250px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      border: 2px dashed #cceaff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #cceaff;
+      margin-bottom: 2rem;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .feature-box {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #cceaff;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      .feature-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="game-container">
-        <canvas id="gameCanvas"></canvas>
+
+  <header>
+    <h1>🔵 Profiles by Skull Studios</h1>
+    <p>Clean, shareable profiles with a blue vibe.</p>
+    <button class="cta-btn" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Explore Features</button>
+  </header>
+
+  <section id="features" class="fade-in">
+    <h2 class="section-title">🚀 Features</h2>
+    <p class="section-sub">Why use Profiles? Because you deserve clean, dope link pages.</p>
+    <div class="feature-list">
+      <div class="feature-box">
+        <h3>Easy Templates</h3>
+        <p>Pick a layout and go. No coding needed. Just your username and vibe.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Custom Widgets</h3>
+        <p>Add Discord status, Spotify activity, GitHub stats — all drag-and-drop.</p>
+      </div>
+      <div class="feature-box">
+        <h3>One Click Share</h3>
+        <p>Click to copy your profile link and flex it on your socials instantly.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Responsive Design</h3>
+        <p>Looks great on desktop, tablet, and even your grandma’s old iPhone.</p>
+      </div>
     </div>
-    <script src="game.js"></script>
+  </section>
+
+  <section class="fade-in">
+    <h2 class="section-title">📸 Widget Demos</h2>
+    <p class="section-sub">Live previews of what you can embed</p>
+    <div class="image-placeholder">[ Discord Status Widget ]</div>
+    <div class="image-placeholder">[ GitHub Contributions Widget ]</div>
+    <div class="image-placeholder">[ Music / Spotify Widget ]</div>
+  </section>
+
+  <section class="fade-in">
+    <h2 class="section-title">🧩 Templates</h2>
+    <p class="section-sub">Choose from clean, animated, or bold profile styles</p>
+    <div class="image-placeholder">[ Template 1 Preview ]</div>
+    <div class="image-placeholder">[ Template 2 Preview ]</div>
+  </section>
+
+  <section class="fade-in">
+    <h2 class="section-title">💬 Coming Soon</h2>
+    <p class="section-sub">- Login system<br>- Profile builder<br>- Theme picker<br>- Live stats tracking</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Skull Studios — Profiles<br>
+    Designed with 💙 for the web
+  </footer>
+
+  <script>
+    // Add fade-in on scroll
+    const fadeIns = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('animate');
+      });
+    }, { threshold: 0.3 });
+
+    fadeIns.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
+
